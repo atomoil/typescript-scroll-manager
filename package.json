@@ -1,0 +1,23 @@
+{
+  "name": "typescript-scroll-manager",
+  "version": "1.0.0",
+  "description": "a scroll manager written in typescript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://atomoil@github.com/atomoil/typescript-scroll-manager.git"
+  },
+  "author": "atom.oil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atomoil/typescript-scroll-manager/issues"
+  },
+  "homepage": "https://github.com/atomoil/typescript-scroll-manager#readme",
+  "devDependencies": {
+    "typescript": "^3.9.6"
+  }
+}
