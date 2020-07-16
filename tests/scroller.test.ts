@@ -1,7 +1,7 @@
 import {
     ScrollManager,
     ScrollItem
-} from '../lib/scroll-core'
+} from '../lib'
 
 import { BasicItemProvider } from './scroll-example'
 

@@ -4,9 +4,9 @@ export interface Positionable {
     setPosition(x: number | null, y: number | null): void
 }
 
-export interface ItemProvider {
-    getItem(data: any): Positionable
-    returnItem(item: any): void
+export interface RenderProvider {
+    getRender(data: any): Positionable
+    returnRender(render: any): void
 }
 
 // @TODO handle horizontal scrolling as well as vertical!
@@ -15,8 +15,8 @@ export class ScrollItem {
     bottom: number
     private _data: any
     private _render: Positionable | null
-    private provider: ItemProvider
-    constructor(provider: ItemProvider, data: any, top: number, height: number) {
+    private provider: RenderProvider
+    constructor(provider: RenderProvider, data: any, top: number, height: number) {
         this.provider = provider
         this.top = top
         this.bottom = top + height
@@ -40,16 +40,15 @@ export class ScrollItem {
     }
 
     private remove(): void {
-        this.provider.returnItem(this._render)
+        this.provider.returnRender(this._render)
         this._render = null
     }
 
     private add(): void {
-        this._render = this.provider.getItem(this._data)
+        this._render = this.provider.getRender(this._data)
     }
 
     private move(to: number) {
-        // ?
         if (this._render) {
             this._render.setPosition(null, this.top - to)
         }
@@ -93,13 +92,14 @@ export class ScrollManager {
             item.update(vTop, vBottom)
         })
     }
-    get itemSize(): ItemSize {
-        const reducer = (acc: ItemSize, current:ScrollItem):ItemSize => {
-            acc.min = Math.min(acc.min, current.top)
-            acc.max = Math.max(acc.max, current.bottom)
+
+    get bounds(): ScrollBounds {
+        const reducer = (acc: ScrollBounds, current:ScrollItem):ScrollBounds => {
+            acc.top = Math.min(acc.top, current.top)
+            acc.bottom = Math.max(acc.bottom, current.bottom)
             return acc
         }
-        return this.items.reduce(reducer, {min:Number.MAX_VALUE,max:Number.MIN_VALUE})
+        return this.items.reduce(reducer, {top:Number.MAX_VALUE,bottom:Number.MIN_VALUE})
     }
 
     get activeItems(): ScrollItem[] {
@@ -107,4 +107,4 @@ export class ScrollManager {
     }
 }
 
-interface ItemSize { min: number, max: number }
+interface ScrollBounds { top: number, bottom: number }

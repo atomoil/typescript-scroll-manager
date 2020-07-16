@@ -1,19 +1,19 @@
-import { ItemProvider, Positionable } from '../lib/scroll-core'
+import { RenderProvider, Positionable } from '../lib'
 
-export class BasicItemProvider implements ItemProvider {
+export class BasicItemProvider implements RenderProvider {
     _items: BasicItem[]
     counter: number
     constructor() {
         this._items = []
         this.counter = 0
     }
-    getItem(data: any): BasicItem {
+    getRender(data: any): BasicItem {
         if (this._items.length == 0) {
             return new BasicItem(this.counter++)
         }
         return <BasicItem>this._items.pop()
     }
-    returnItem(item: BasicItem): void {
+    returnRender(item: BasicItem): void {
         this._items.push(item)
     }
 }
