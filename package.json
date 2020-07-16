@@ -1,12 +1,12 @@
 {
   "name": "typescript-scroll-manager",
-  "version": "1.0.0",
-  "description": "a scroll manager written in typescript",
+  "version": "1.0.1",
+  "description": "a scrolling scroll manager written in typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepublish": "tsc",
+    "prepublish": "tsc && jest",
     "test": "jest"
   },
   "repository": {
